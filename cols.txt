@@ -1,0 +1,201 @@
+start
+end
+today
+deviceid
+Institutional Lead: Amoud University (RIC / VPAA&R)\n\nThis survey is conducted for academic and community development purposes. Your participation is voluntary. The information you provide will be kept confidential and used only for research and planning purposes. You may refuse to answer any question or stop the interview at any time.
+001. Cluster/Quarter
+Faculty / School
+002. Household ID
+003. Enumerator Name
+004. Enumerator ID
+005. Supervisor Name/ID
+006. GPS Coordinates
+_006. GPS Coordinates_latitude
+_006. GPS Coordinates_longitude
+_006. GPS Coordinates_altitude
+_006. GPS Coordinates_precision
+005. Informed Consent
+Name of Respondent (optional)
+006. Respondent Age
+007. Respondent Sex
+008. Relationship of respondent to household head
+Interview not conducted because consent was not provided. End interview here.
+101. Sex of Household Head?
+102. Age of Household Head (in completed years)?
+103. Marital Status of Head?
+104. Total number of usual residents (living/eating together)?
+105. Does any member have a chronic disability (Seeing/Hearing/Walking/Cognition)?
+106. Highest level of education completed by the HH Head?
+107. Main material of the exterior walls?
+108. Main material of the roof?
+109. What is the primary source of drinking water?
+110. Primary type of toilet facility?
+111. Is the household’s dwelling owned
+112. Does the HH possess a residency certificate or land title?
+113. Does the household own a functional basic mobile phone?
+114. Does the household own a smartphone?
+115. Does the household own a radio or television?
+116. Does the household own a refrigerator or freezer?
+117. Does the household own a modern bed with mattress?
+118. Does the household own an electric or gas cooking stove?
+119. Does the household own a private vehicle (car/truck)?
+120. Does the household own a motorbike or bicycle?
+121. What is the primary employment status of the HH Head?
+122. Does the HH Head engage in any secondary income activity (e.g.
+123. How many adults (18+) in this household are currently unemployed and seeking work?
+124. What is the main source of income for the entire household?
+125. Estimated total monthly expenditure for the household (USD)?
+126. What is the largest monthly expense for the household?
+127. In the past 7 days
+128. In the past 12 months
+129. If Yes to 128
+130. How many times has the household moved residence in the last 5 years?
+calc_water_source_label
+The following questions are about your food situation over the past year. We know these are personal, but they help the university understand the community's needs.
+401. In the last 12 months, were you worried you would not have enough food to eat?
+402. Were you unable to eat healthy and nutritious food due to lack of money?
+403. Did you eat only a few kinds of foods due to lack of resources?
+404. Did you have to skip a meal because there was not enough money/food?
+405. Did you eat less than you thought you should because of lack of money?
+406. Did your household run out of food entirely?
+407. Were you hungry but did not eat because there was not enough food?
+408. Did you go a whole day without eating?
+409. Has the youngest child ever been measured with MUAC (Arm tape)? What was the color?
+410. Has the youngest child (under 5) received Vitamin A or Deworming in the last 6 months?
+As previously mentioned, your main drinking water source is ${calc_water_source_label}.
+411. Do you treat your water to make it safe to drink?
+412. [OBSERVE] Are water and soap both present at the handwashing place?
+413. How are children's feces primarily disposed of?
+414. Where/How do you mainly dispose of household solid waste?
+415. In the last month, how often have you felt scared, blue, or depressed without a clear reason?
+416. In the last month, have you found it hard to wind down or relax?
+417. Have you experienced a severe trauma (war, accident, or sudden loss)?
+418. What is the most common cause of mental illness in this community?
+419. Does any person with disability in this HH face barriers to accessing health or school?
+420. Overall, how satisfied are you with the public health and environment in your area? (1-5 Scale)
+1001. Primary source of electricity for this household?
+1002. Average hours of electricity available per day?
+1003. Primary fuel used for cooking?
+1004. Does your household use a Solar PV System (Panels)?
+1005. Do you use energy-saving bulbs (LED/CFL) for most of your lighting?
+1006. Approximately how old is this building?
+1007. [OBSERVE] Main material used for the external walls?
+1008. [OBSERVE] Main material used for the roof?
+1009. How would you rate the perceived structural safety of your home? (1-4 Scale)
+1010. Have you noticed any structural cracks (wider than 2mm) in the walls or foundation?
+1011. Is there evidence of dampness on lower walls or significant vibration when vehicles pass?
+1012. Is your house located within 200 meters of a paved (asphalt/concrete) road?
+1013. How would you rate the quality of the roads immediately surrounding your home? (1-5 Scale)
+1014. Is public transportation (bus/taxi) easily accessible from your home?
+1015. Overall, how satisfied are you with the Urban Planning (zoning/public spaces) in Borama? (1-4 Scale)
+1016. Does your neighborhood have functional drainage systems to prevent waterlogging?
+1017. Are there functional streetlights available in your immediate neighborhood?
+1018. Technical Capacity: Are your home repairs typically conducted by certified/professional engineers?
+1019. Climate Vulnerability: In the past 12 months, has your house experienced flooding or rainwater intrusion?
+1020. Overall, how satisfied are you with the Engineering Quality and Reliability of your home? (1-5 Scale)
+Maternal and newborn continuum of care.
+301. For the last pregnancy in this household, how many Antenatal Care (ANC) visits were made to a health facility?
+302. During the last pregnancy, was the mother informed about danger signs (e.g., bleeding, severe headache, blurred vision)?
+303. During the last pregnancy, did the mother receive Iron/Folic Acid supplements or Tetanus injections?
+304. What is the distance to the nearest maternity or MCH clinic from your home?
+305. Who provided the majority of the advice during the last pregnancy?
+306. Where did the last delivery in this household take place?
+306a. Specify other place of delivery.
+307. Who assisted with the last delivery? (Select the highest qualification)
+308. Was a postnatal check-up (PNC) conducted for both mother and baby within 48 hours of delivery?
+309. During delivery or labor, were any traditional birth herbs or "Uunsi" used for medicinal purposes?
+310. Has this household ever experienced the loss of a newborn (within the first 28 days of life)?
+311. Was the last child born in this household exclusively breastfed for the first 6 months?
+312. Are all children under 5 in the household fully vaccinated (check vaccination card if available)?
+313. When a child is sick with a fever or cough, what is the first action taken by the household?
+314. Is there a child health growth chart kept in the home for children under 2 years?
+315. Does any adult in the household have basic knowledge of first aid (e.g., wound care, choking, or fainting)?
+316. Are modern family planning methods (e.g., pills, injections, implants) known and available to the household?
+317. If Family Planning is not used, what is the primary reason?
+318. How would you rate your level of trust in the advice provided by Midwives compared to Traditional healers?
+319. Have you ever felt that a Nurse/Midwife in Borama treated you with high professional ethics and respect?
+320. Overall, how satisfied are you with the quality of Nursing care received at your local health facility?
+201. Has any adult member (18+) been diagnosed with Hypertension (High BP)?
+202. Has any adult member (18+) been diagnosed with Diabetes (High Sugar)?
+203. Do those with chronic conditions take their medication every day as prescribed?
+204. Does any member suffer from Chronic Pain (long-term joint or muscle issues)?
+205. Does your household own a device to monitor Blood Pressure or Blood Sugar?
+206. Was surgery needed for any member of this household in the last 12 months?
+206a. If surgery was needed, was it performed?
+207. If surgery was needed but not performed, what was the main barrier?
+209. Has any member required Emergency Care in the last 12 months?
+208. Where was the last surgery or emergency care received?
+210. In an emergency, how long does it take to reach the hospital?
+211. Does any member suffer from Epilepsy (seizures, fits, or loss of consciousness)?
+212. Does any member show unusual behavior (talking to self, hearing voices, or extreme paranoia)?
+213. Does any member suffer from frequent Clinical Depression or Anxiety (Scored by doctor)?
+214. Does any child show significant delay in speech, learning, or social interaction?
+215. Has any member been clinically diagnosed with Anemia (Low Blood)?
+216. Does the household have any form of health insurance or employer scheme?
+217. Do you know the Warning Signs of a Stroke (Face/Arm/Speech)?
+218. Does any member of the household use Tobacco or Khat daily?
+219. Are you aware of any Cancer Screening services (Breast/Cervical) in Borama?
+220. Overall, how satisfied are you with the Doctors in Borama facilities? (1-5 Scale)
+601. Do you agree that early laboratory testing improves the chances of successful treatment compared to late testing?
+602. In the last 12 months, how many times has any member of your household visited a laboratory for medical testing?
+603. How long do you typically wait to receive results for a basic test (e.g., Malaria/Urine)?
+604. What is the most significant barrier to seeking laboratory diagnosis?
+605. If a new infectious disease outbreak occurred, would your household know where to access testing?
+606. Has any adult member (15+) ever been screened for HIV or TB in a laboratory?
+607. Has any member been tested for Hepatitis B or C (especially before vaccination)?
+608. When a member has a fever, do they seek laboratory testing before taking medication?
+609. Are you aware that diseases can be transmitted through unsafe needle practices in labs?
+610. Diabetes Quality: Have members with diabetes ever undergone an HbA1c test for long-term sugar control?
+611. Pre-analytical Quality: For sugar/lipid tests, was the member instructed to fast (no food) for 8–12 hours before the draw?
+612. Renal Function: Has any member ever been tested for Creatinine (Kidney function) as part of chronic care?
+613. Hepatic Function: Has any member undergone Liver Function Tests (LFT) to monitor the effects of long-term medications?
+614. Hematology: Has any member (especially women/children) ever been diagnosed with Anemia (Low Blood) by a lab?
+615. Oncology Screening: Have male members (40+) had a PSA test OR have female members had a Pap Smear?
+616. Rh-Factor Knowledge: Do you know if the mothers in this HH have Rh-negative blood type?
+617. How much do you trust the accuracy of results from local private laboratories compared to public/government labs?
+618. How would you rate the hygiene and cleanliness of the laboratory facilities in Borama?
+619. Has any member of this household ever donated blood at a hospital or blood bank?
+620. Overall, how satisfied are you with the professionalism and conduct of Laboratory staff?
+501. Availability of essential medicines at the nearest pharmacy?
+502. Distance to the nearest licensed pharmacy?
+503. Primary source of medicines for this household?
+504. Does cost prevent you from buying the full course of prescribed medicines?
+505. Average waiting time at the pharmacy before being served?
+506. Do you buy antibiotics without a doctor's prescription?
+507. Do you share medicines with others (neighbors/family) when they have similar symptoms?
+508. Do you stop taking a prescribed medicine as soon as you feel better?
+509. Knowledge of antibiotic resistance (medicines stop working if misused)?
+510. Use of traditional/herbal medicines instead of pharmacy drugs?
+511. Do you check expiry dates on the packaging before using medicines?
+512. Awareness of counterfeit (fake) medicines in the local market?
+513. Are medicines at home stored in a safe place (away from heat and children)?
+514. How do you mainly dispose of expired or unused medicines?
+515. Have you ever experienced an adverse reaction (side effect) from a medicine?
+516. If yes to 515, did you report it to a health professional?
+517. Do you receive counseling/explanation on how to use your medicines?
+518. Are the instructions/labels on the medicine packaging easy to read and understand?
+519. Level of trust in the pharmacist’s medical advice?
+520. Overall satisfaction with pharmacy services in Borama?
+701. Has any child in this household ever undergone traditional “Ilka Dacawo” (Infant Oral Mutilation)?
+702. What was the primary reason the child was taken for IOM?
+702a. Specify other reason for IOM.
+703. Total number of children in the household who have undergone IOM?
+704. How would you rate the level of danger associated with the practice of IOM?
+705. What tools are primarily used in this household for cleaning teeth?
+706. Does the toothpaste used in this household contain fluoride? (Check packaging)
+707. How often do the children in this household brush their teeth?
+708. On average, how many days per week does the household head chew khat?
+709. Total cups of sugar-sweetened tea/coffee consumed by the household daily?
+710. Does any adult household member have chronic sores or white patches (oral cancer screening) inside their mouth?
+711. Total out-of-pocket expenditure on dental treatments for the household in the last 6 months (USD)?
+712. What is the primary facility the household uses for dental emergencies?
+713. Has any household member avoided dental care in the last year due to cost?
+714. Did the mother experience severe dental pain or gum swelling during her most recent pregnancy?
+715. What was the main feeding method for the youngest child during the first year?
+716. Do any adult household members have gum bleeding when brushing or eating?
+717. Has any household member ever had a traditional tooth extraction (adult)?
+718. Do any children (6–18 years) have visible brown or chalky-white stains (fluorosis) on their teeth?
+719. How satisfied are you with the taste and appearance of your drinking water?
+720. How would you rate the overall dental health of your household members?
+Digital literacy and information access.
+801. How many functional mobile phones (a

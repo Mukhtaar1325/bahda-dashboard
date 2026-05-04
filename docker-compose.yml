@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  bahda-dashboard:
+    build: .
+    container_name: bahda_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      # Persist the database and config across restarts
+      - ./database:/app/database
+      - ./config/secrets.env:/app/config/secrets.env
+      - ./config/auth.yaml:/app/config/auth.yaml
+    restart: always
+    environment:
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
