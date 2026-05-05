@@ -1,4 +1,8 @@
 import streamlit as st
+from pathlib import Path
+
+# Define base directory
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 def show():
     # Premium CSS for landing page
