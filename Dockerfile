@@ -21,11 +21,9 @@ RUN pip3 install -r requirements.txt
 # Copy the rest of the application
 COPY . .
 
-# Expose port
+# Expose port (Railway will override this with the $PORT variable)
 EXPOSE 8501
 
-# Healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
-
 # Run the application
-ENTRYPOINT ["streamlit", "run", "app/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# We use sh -c to allow environment variable expansion for $PORT
+ENTRYPOINT ["sh", "-c", "streamlit run app/streamlit_app.py --server.port=${PORT:-8501} --server.address=0.0.0.0"]
