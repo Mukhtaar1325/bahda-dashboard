@@ -3,7 +3,7 @@ credentials:
     bahda2026:
       email: bahda2026@amoud.edu.so
       name: BAHDA Super Administrator
-      password: $2b$12$KGnD7n2qLVLUO1TsfzbCl.L4IFNm366S6E7YIX9g1ToKu8kBZjfQK
+      password: $2b$12$qLHHi5Fipam48fPMgHSrC.cHyBvZ3j1fyW.rc5EiALPwXct6M/c76
       role: admin
     it_support:
       email: ict@amoud.edu.so
