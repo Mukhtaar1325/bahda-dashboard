@@ -72,10 +72,12 @@ def show():
     with st.container():
         col1, col2 = st.columns([1, 4])
         with col1:
-            try:
-                st.image(r"C:\Users\rhaag\Desktop\OneDrive\Pictures\Amoud logo.jpg", width=200)
-            except:
-                st.markdown("🏢")
+            # Look for logo in the assets folder (relative to project root)
+            logo_path = BASE_DIR / "assets" / "logo.jpg"
+            if logo_path.exists():
+                st.image(str(logo_path), width=200)
+            else:
+                st.markdown("<h1 style='font-size: 100px; margin: 0;'>🏢</h1>", unsafe_allow_html=True)
         with col2:
             st.markdown("""
                 <div class="hero-section">

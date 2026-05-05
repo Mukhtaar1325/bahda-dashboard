@@ -8,6 +8,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODULES_DIR = BASE_DIR / "app" / "modules"
 
+# Ensure database is initialized (Crucial for Streamlit Cloud)
+from database.db_utils import init_db
+from config.settings import DB_PATH
+if not DB_PATH.exists():
+    init_db()
+
 st.set_page_config(
     page_title="BAHDA Survey Control Center",
     page_icon="💎",
@@ -17,15 +23,25 @@ st.set_page_config(
 
 # Authentication logic
 auth_config_path = BASE_DIR / "config" / "auth.yaml"
-with open(auth_config_path) as file:
-    config = yaml.load(file, Loader=SafeLoader)
 
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days']
-)
+if not auth_config_path.exists():
+    st.error(f"⚠️ Configuration Error: `{auth_config_path}` not found.")
+    st.info("Please ensure your `config/auth.yaml` file is pushed to GitHub.")
+    st.stop()
+
+try:
+    with open(auth_config_path) as file:
+        config = yaml.load(file, Loader=SafeLoader)
+
+    authenticator = stauth.Authenticate(
+        config['credentials'],
+        config['cookie']['name'],
+        config['cookie']['key'],
+        config['cookie']['expiry_days']
+    )
+except Exception as e:
+    st.error(f"❌ Error loading Authentication: {e}")
+    st.stop()
 
 # Render the login widget
 authenticator.login()
@@ -70,6 +86,15 @@ if st.session_state["authentication_status"]:
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 📊 System Status")
     st.sidebar.code(f"User: {username.upper()}\nRole: {user_role.upper()}\nPipeline: ACTIVE")
+
+    # Data Sync Button (Admins only)
+    if user_role == 'admin':
+        if st.sidebar.button("🔄 Sync with Kobo"):
+            with st.sidebar.status("Fetching latest data...", expanded=True) as status:
+                from data_pipeline.run_pipeline import run as run_pipeline
+                run_pipeline()
+                status.update(label="Sync Complete!", state="complete", expanded=False)
+                st.rerun()
 
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
