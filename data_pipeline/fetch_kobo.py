@@ -6,19 +6,26 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from config.settings import KOBO_BASE_URL
 
-# Load secrets manually without python-dotenv
-env_path = Path(__file__).resolve().parent.parent / "config" / "secrets.env"
-if env_path.exists():
-    with open(env_path, 'r') as f:
-        for line in f:
-            line = line.strip()
-            if line and not line.startswith('#') and '=' in line:
-                k, v = line.split('=', 1)
-                os.environ[k] = v
-
-KOBO_API_TOKEN = os.environ.get("KOBO_API_TOKEN")
-KOBO_ASSET_UID = os.environ.get("KOBO_ASSET_UID")
-KOBO_CSV_URL = os.environ.get("KOBO_CSV_URL")
+# Try to load from st.secrets if running inside Streamlit
+try:
+    import streamlit as st
+    KOBO_API_TOKEN = st.secrets.get("KOBO_API_TOKEN", os.environ.get("KOBO_API_TOKEN"))
+    KOBO_ASSET_UID = st.secrets.get("KOBO_ASSET_UID", os.environ.get("KOBO_ASSET_UID"))
+    KOBO_CSV_URL = st.secrets.get("KOBO_CSV_URL", os.environ.get("KOBO_CSV_URL"))
+except:
+    # Manual load for local/standalone run
+    env_path = Path(__file__).resolve().parent.parent / "config" / "secrets.env"
+    if env_path.exists():
+        with open(env_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    os.environ[k] = v.strip('"').strip("'")
+    
+    KOBO_API_TOKEN = os.environ.get("KOBO_API_TOKEN")
+    KOBO_ASSET_UID = os.environ.get("KOBO_ASSET_UID")
+    KOBO_CSV_URL = os.environ.get("KOBO_CSV_URL")
 
 def fetch_submissions():
     """Fetches submissions from KoboToolbox API."""
