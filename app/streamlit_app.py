@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 from pathlib import Path
@@ -13,6 +12,8 @@ if str(BASE_DIR) not in sys.path:
 
 # Base directories
 MODULES_DIR = BASE_DIR / "app" / "modules"
+
+import streamlit_authenticator as stauth
 
 # Ensure database is initialized (Crucial for Streamlit Cloud)
 from database.db_utils import init_db
