@@ -69,6 +69,28 @@ def show():
             color: #64748B;
             line-height: 1.5;
         }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 1.5rem;
+                border-radius: 1rem;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .feature-card {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            [data-testid="stMetric"] {
+                padding: 0.5rem;
+            }
+        }
         </style>
     """, unsafe_allow_html=True)
     

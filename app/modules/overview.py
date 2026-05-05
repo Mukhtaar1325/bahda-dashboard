@@ -84,15 +84,43 @@ st.markdown("""
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         margin-bottom: 1.5rem;
     }
+
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 768px) {
+        .metric-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .metric-card {
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+        .metric-val {
+            font-size: 2rem;
+        }
+        .section-header {
+            font-size: 1.4rem;
+        }
+        .chart-container {
+            padding: 1rem;
+        }
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # Custom Header
 st.markdown("""
-    <div style="background: linear-gradient(90deg, #1E293B 0%, #3B82F6 100%); padding: 3rem; border-radius: 2rem; margin-bottom: 3rem; color: white;">
-        <h1 style="margin: 0; font-weight: 800; font-size: 3.5rem; letter-spacing: -0.02em;">📈 BAHDA Live Insights</h1>
-        <p style="font-size: 1.2rem; opacity: 0.9; margin-top: 0.5rem;">Real-time monitoring of household assessment progress across Somaliland.</p>
+    <div class="custom-header-container" style="background: linear-gradient(90deg, #1E293B 0%, #3B82F6 100%); padding: 2rem; border-radius: 1.5rem; margin-bottom: 2rem; color: white;">
+        <h1 class="header-title" style="margin: 0; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.02em;">📈 BAHDA Live Insights</h1>
+        <p class="header-subtitle" style="font-size: 1rem; opacity: 0.9; margin-top: 0.5rem;">Real-time monitoring of household assessment progress across Somaliland.</p>
     </div>
+    <style>
+        @media (max-width: 768px) {
+            .custom-header-container { padding: 1.5rem !important; border-radius: 1rem !important; }
+            .header-title { font-size: 1.8rem !important; }
+            .header-subtitle { font-size: 0.9rem !important; }
+        }
+    </style>
 """, unsafe_allow_html=True)
 
 def load_and_render_dashboard():
