@@ -3,9 +3,15 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 from pathlib import Path
+import sys
+import os
+
+# Add project root to sys.path for robust imports on Streamlit Cloud
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
 
 # Base directories
-BASE_DIR = Path(__file__).resolve().parent.parent
 MODULES_DIR = BASE_DIR / "app" / "modules"
 
 # Ensure database is initialized (Crucial for Streamlit Cloud)
