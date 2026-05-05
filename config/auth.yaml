@@ -1,0 +1,20 @@
+credentials:
+  usernames:
+    bahda2026:
+      email: bahda2026@amoud.edu.so
+      name: BAHDA Super Administrator
+      password: $2b$12$KGnD7n2qLVLUO1TsfzbCl.L4IFNm366S6E7YIX9g1ToKu8kBZjfQK
+      role: admin
+    it_support:
+      email: ict@amoud.edu.so
+      name: IT Support Officer
+      password: $2b$12$EVI2HBTZFlltbGwTxEQ/8.vD2n1kY9pIqf/QGJ7L915RCcaqDHaDG
+      role: viewer
+cookie:
+  expiry_days: 30
+  key: some_signature_key
+  name: bahda_auth_v2
+preauthorized:
+  emails:
+    - bahda2026@amoud.edu.so
+    - ict@amoud.edu.so

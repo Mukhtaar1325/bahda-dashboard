@@ -6,7 +6,7 @@ venv/
 .venv/
 .env
 config/secrets.env
-config/auth.yaml
+# config/auth.yaml is now included for deployment
 
 # Data and Database
 database/*.db
