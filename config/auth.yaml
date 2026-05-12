@@ -1,9 +1,9 @@
 credentials:
   usernames:
-    taskforce:
-      email: taskforce@amoud.edu.so
-      name: Task Force Pilot
-      password: $2b$12$KBf.TaKXnSNmpTCfynHTGurFIhUZ5/A.8seGQk1FOs.BC6UPC4Z3e
+    bahda2026:
+      email: bahda@amoud.edu.so
+      name: Bahda Admin
+      password: $2b$12$1oCaxLT4kifuuKAJbBi7LeGDHaK6EE3F715dN8EAN8NOajHouk0GS
       role: admin
 cookie:
   expiry_days: 30
