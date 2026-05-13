@@ -31,6 +31,7 @@ def render_map():
                 gps_lat as lat, 
                 gps_lon as lon,
                 enumerator_id,
+                supervisor_id,
                 cluster_id,
                 interview_date,
                 water_source,
@@ -46,29 +47,34 @@ def render_map():
         # Filtering logic in sidebar
         st.sidebar.markdown("### 🔍 Map Controls")
         
-        # Determine unique clusters and identify Borama ones
+        # 1. Zone/District Filter (A, B, C, D) based on naming convention
+        zone_options = ["All Zones", "A - Sh. Osman", "B - Sh. Ali Jauhar", "C - Sh. Ahmed Salan", "D - Sh. Makahil"]
+        selected_zone_label = st.sidebar.selectbox("Select Zone (District)", zone_options)
+        selected_zone_prefix = selected_zone_label[0] if selected_zone_label != "All Zones" else None
+
+        # 2. Cluster Filter
         all_clusters = sorted(df['cluster_id'].unique().tolist())
-        
-        # User wants "Focus on Borama"
-        # Since we know Borama clusters are the main ones here, we can offer a quick filter
-        focus_borama = st.sidebar.checkbox("Focus on Borama City", value=True)
-        
         selected_cluster = st.sidebar.selectbox(
             "Select Specific Cluster",
             ["All Clusters"] + all_clusters
         )
         
-        # Apply filters
+        # Apply filters to plot_df
         plot_df = df.copy()
         
-        # If "Focus on Borama" is checked, we filter out coordinates near (0,0) and outside Somaliland
-        # to ensure the map isn't zoomed out to the whole world
+        # coordinate validation
         plot_df = plot_df[
             (plot_df['lat'].abs() > 0.1) & 
             (plot_df['lat'] > 8.0) & (plot_df['lat'] < 12.0) &
             (plot_df['lon'] > 42.0) & (plot_df['lon'] < 49.0)
         ]
         
+        if selected_zone_prefix:
+            # Note: We use the cluster_id mapping or subzone_letter column if available.
+            # For simplicity, if we are filtering the MAP, we want to see records in that Zone.
+            # In clean_submissions, we have subzone_letter.
+            plot_df = plot_df[plot_df['cluster_id'].str.contains(selected_zone_label.split(' - ')[1], case=False, na=False)]
+
         if selected_cluster != "All Clusters":
             plot_df = plot_df[plot_df['cluster_id'] == selected_cluster]
         
@@ -77,8 +83,8 @@ def render_map():
             avg_lat = plot_df['lat'].mean()
             avg_lon = plot_df['lon'].mean()
             
-            # Zoom level: tighter if specific cluster selected
-            zoom = 16 if selected_cluster != "All Clusters" else 14
+            # Zoom level
+            zoom = 16 if selected_cluster != "All Clusters" else (15 if selected_zone_prefix else 14)
             
             m = folium.Map(
                 location=[avg_lat, avg_lon],
@@ -96,18 +102,56 @@ def render_map():
             folium.TileLayer(tiles=google_satellite, attr="Google", name="Google Satellite", overlay=False).add_to(m)
             folium.TileLayer(tiles=google_roadmap, attr="Google", name="Google Roadmap", overlay=False).add_to(m)
 
+            # --- ADD KML SUB-ZONE BOUNDARIES ---
+            try:
+                import json
+                zones_path = Path(__file__).resolve().parent.parent.parent / "database" / "sub_zones.json"
+                if zones_path.exists():
+                    with open(zones_path, 'r') as f:
+                        zones = json.load(f)
+                    
+                    # Create a feature group for boundaries
+                    fg_zones = folium.FeatureGroup(name="Sub-Zone Boundaries")
+                    for zone in zones:
+                        # Filter zones by prefix if selected
+                        if selected_zone_prefix and not zone['name'].startswith(selected_zone_prefix):
+                            continue
+                            
+                        folium.Polygon(
+                            locations=zone['coordinates'],
+                            color="#10B981",
+                            weight=2,
+                            fill=True,
+                            fill_color="#10B981",
+                            fill_opacity=0.1,
+                            tooltip=f"Sub-Zone: {zone['name']}"
+                        ).add_to(fg_zones)
+                    fg_zones.add_to(m)
+            except Exception as kml_err:
+                st.sidebar.error(f"KML Overlay Error: {kml_err}")
+
             # Add markers
             for _, row in plot_df.iterrows():
+                # Fallback for None values
+                e_id = str(row['enumerator_id']) if row['enumerator_id'] else "Missing"
+                s_id = str(row['supervisor_id']) if row['supervisor_id'] else "Missing"
+                
+                # Better tooltip for hover
+                hover_text = f"Sup: {s_id} | Enum: {e_id}"
+                
                 popup_html = f"""
-                    <div style="font-family: sans-serif; min-width: 180px;">
-                        <h4 style="margin:0; color:#10B981;">{row['cluster_id']}</h4>
-                        <hr style="margin: 5px 0; border: 0.5px solid #eee;">
-                        <b>Enumerator:</b> {row['enumerator_id']}<br>
-                        <b>Date:</b> {row['interview_date']}<br>
-                        <b>Water:</b> {row['water_source']}<br>
-                        <b>Faculty:</b> {row['faculty_school']}
+                    <div style="font-family: 'Outfit', sans-serif; min-width: 200px; padding: 5px;">
+                        <h4 style="margin:0; color:#3B82F6;">ID: {e_id}</h4>
+                        <hr style="margin: 8px 0; border: 0.5px solid #E2E8F0;">
+                        <table style="width: 100%; font-size: 13px;">
+                            <tr><td><b>Supervisor:</b></td><td><span style="color:#10B981; font-weight:bold;">{s_id}</span></td></tr>
+                            <tr><td><b>Cluster:</b></td><td>{row['cluster_id']}</td></tr>
+                            <tr><td><b>Faculty:</b></td><td>{row['faculty_school']}</td></tr>
+                            <tr><td><b>Date:</b></td><td>{row['interview_date']}</td></tr>
+                        </table>
                     </div>
                 """
+                
                 folium.CircleMarker(
                     location=[row['lat'], row['lon']],
                     radius=8,
@@ -115,8 +159,8 @@ def render_map():
                     fill=True,
                     fill_color="#3B82F6",
                     fill_opacity=0.7,
-                    popup=folium.Popup(popup_html, max_width=300),
-                    tooltip=f"ID: {row['enumerator_id']}"
+                    popup=folium.Popup(popup_html, max_width=350),
+                    tooltip=hover_text
                 ).add_to(m)
             
             folium.LayerControl().add_to(m)

@@ -28,7 +28,7 @@ def insert_dataframe(df, table_name):
         except Exception as e:
             print(f"Db Error in {table_name}: {e}")
 
-def load_data(raw_df, clean_df, indicators_df, daily_df, cluster_df, enum_df, faculty_df, quality_df):
+def load_data(raw_df, clean_df, indicators_df, daily_df, cluster_df, enum_df, faculty_df, quality_df, supervisor_df=None):
     print("Loading data into Database...")
     insert_dataframe(raw_df, 'raw_submissions')
     insert_dataframe(clean_df, 'clean_submissions')
@@ -46,5 +46,7 @@ def load_data(raw_df, clean_df, indicators_df, daily_df, cluster_df, enum_df, fa
             faculty_df.to_sql('faculty_summary', conn, if_exists='replace', index=False)
         if not quality_df.empty:
             quality_df.to_sql('quality_flags', conn, if_exists='replace', index=False)
+        if supervisor_df is not None and not supervisor_df.empty:
+            supervisor_df.to_sql('supervisor_summary', conn, if_exists='replace', index=False)
             
     print("Loading complete.")

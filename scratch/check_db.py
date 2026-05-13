@@ -1,20 +1,17 @@
 import sqlite3
 import os
+from pathlib import Path
 
-db_path = r'c:\Users\rhaag\.gemini\antigravity\scratch\bahda_dashboard\database\bahda.db'
-if os.path.exists(db_path):
+db_path = Path("database/bahda.db")
+if not db_path.exists():
+    print(f"Database {db_path} not found.")
+else:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
-    cursor.execute("SELECT DISTINCT cluster_id FROM clean_submissions")
-    rows = cursor.fetchall()
-    print("Distinct cluster_ids:")
-    for row in rows:
-        print(row[0])
-    
-    cursor.execute("SELECT COUNT(*) FROM clean_submissions WHERE gps_lat IS NULL OR ABS(gps_lat) < 0.1")
-    count = cursor.fetchone()[0]
-    print(f"\nSubmissions with missing/invalid GPS: {count}")
-    
+    try:
+        cursor.execute("SELECT count(*) FROM clean_submissions")
+        count = cursor.fetchone()[0]
+        print(f"Total clean submissions: {count}")
+    except Exception as e:
+        print(f"Error: {e}")
     conn.close()
-else:
-    print(f"DB not found at {db_path}")

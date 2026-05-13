@@ -76,11 +76,12 @@ if st.session_state["authentication_status"]:
     overview_page = st.Page(str(m_dir / "overview.py"), title="Live Overview", icon="📈")
     map_page = st.Page(str(m_dir / "map.py"), title="Geo View", icon="🌍")
     quality_page = st.Page(str(m_dir / "quality.py"), title="Quality Control", icon="🔍")
+    supervisors_page = st.Page(str(m_dir / "supervisors.py"), title="Supervisor Tracking", icon="🕵️")
     ai_page = st.Page(str(m_dir / "ai_insights.py"), title="AI Insights", icon="🤖")
 
     # 2. Filter pages based on role
     if user_role == 'admin':
-        pages = [home_page, overview_page, map_page, quality_page, ai_page]
+        pages = [home_page, overview_page, map_page, quality_page, supervisors_page, ai_page]
     else:
         # IT Support / Viewers ONLY see Home and Overview
         pages = [home_page, overview_page]

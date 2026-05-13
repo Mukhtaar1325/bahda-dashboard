@@ -21,6 +21,11 @@ CREATE TABLE IF NOT EXISTS clean_submissions (
     education_level TEXT,
     health_indicator TEXT,
     faculty_school TEXT,
+    supervisor_id TEXT,
+    subzone_letter TEXT,
+    zone_num INTEGER,
+    subzone_num INTEGER,
+    cluster_match_flag BOOLEAN,
     FOREIGN KEY(_id) REFERENCES raw_submissions(_id)
 );
 
@@ -74,4 +79,14 @@ CREATE TABLE IF NOT EXISTS enumerator_summary (
 CREATE TABLE IF NOT EXISTS faculty_summary (
     faculty_school TEXT PRIMARY KEY,
     total_submissions INTEGER
+);
+
+-- 9. Supervisor Performance and Mapping
+CREATE TABLE IF NOT EXISTS supervisor_summary (
+    supervisor_id TEXT,
+    subzone_code TEXT,
+    faculty_school TEXT,
+    cluster_id TEXT,
+    total_submissions INTEGER,
+    missing_count INTEGER
 );

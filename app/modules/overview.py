@@ -130,7 +130,8 @@ def load_and_render_dashboard():
         faculty_df = fetch_data("SELECT * FROM faculty_summary")
         enum_df = fetch_data("SELECT * FROM enumerator_summary")
         
-        total_interviews = daily_df['total_submissions'].sum() if not daily_df.empty else 0
+        # Calculate metrics
+        total_interviews = fetch_data("SELECT COUNT(*) as count FROM clean_submissions")['count'].iloc[0]
         total_clusters = len(cluster_df) if not cluster_df.empty else 0
         active_enums = len(enum_df) if not enum_df.empty else 0
 
@@ -188,13 +189,20 @@ def load_and_render_dashboard():
         with col_right:
             st.markdown('<div class="section-header">👥 Submissions by Faculty</div>', unsafe_allow_html=True)
             if not faculty_df.empty:
-                fig_fac = px.pie(faculty_df, values="total_submissions", names="faculty_school",
-                               hole=0.6, color_discrete_sequence=px.colors.qualitative.Pastel)
-                fig_fac.update_traces(textinfo='percent+label', pull=[0.05]*len(faculty_df))
+                # Sort for better comparison
+                faculty_df = faculty_df.sort_values("total_submissions", ascending=True)
+                fig_fac = px.bar(faculty_df, y="faculty_school", x="total_submissions", orientation='h',
+                                color="total_submissions", color_continuous_scale="Tealgrn",
+                                text="total_submissions")
+                fig_fac.update_traces(textposition='outside')
                 fig_fac.update_layout(
-                    height=450, margin=dict(l=10, r=10, t=10, b=10),
+                    showlegend=False, height=450,
+                    margin=dict(l=10, r=40, t=10, b=10),
+                    plot_bgcolor='rgba(0,0,0,0)',
                     paper_bgcolor='white',
-                    legend=dict(orientation="h", yanchor="bottom", y=-0.2, xanchor="center", x=0.5)
+                    yaxis=dict(title="", showgrid=False),
+                    xaxis=dict(title="Submissions", showgrid=True, gridcolor='#F1F5F9'),
+                    coloraxis_showscale=False
                 )
                 st.plotly_chart(fig_fac, use_container_width=True, config={'displayModeBar': False})
             else:

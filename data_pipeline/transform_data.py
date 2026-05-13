@@ -21,7 +21,7 @@ def calculate_indicators(clean_df):
 def generate_daily_summary(clean_df):
     if clean_df.empty:
         return pd.DataFrame()
-    daily = clean_df.groupby('interview_date').agg(
+    daily = clean_df.groupby('interview_date', dropna=False).agg(
         total_submissions=('_id', 'count'),
         avg_duration=('duration_minutes', 'mean')
     ).reset_index()
@@ -57,6 +57,26 @@ def generate_faculty_summary(clean_df):
         total_submissions=('_id', 'count')
     ).reset_index()
     return fac
+
+def generate_supervisor_summary(clean_df):
+    if clean_df.empty:
+        return pd.DataFrame()
+    
+    # Helper to join unique values (if needed, but here we group by them)
+    def join_unique(series):
+        return ", ".join(sorted(set(str(x) for x in series if pd.notna(x))))
+
+    # Group by supervisor_id, faculty, and cluster to see distinct combinations
+    summary = clean_df.groupby(['supervisor_id', 'faculty_school', 'cluster_id']).agg(
+        total_submissions=('_id', 'count'),
+        subzone_code=('subzone_letter', lambda x: join_unique(x))
+    ).reset_index()
+    
+    # Calculate missing count
+    summary['missing_count'] = 0
+    summary.loc[summary['supervisor_id'] == 'MISSING', 'missing_count'] = summary['total_submissions']
+    
+    return summary
 
 def generate_quality_flags(clean_df):
     """Detects data quality issues, specifically GPS anomalies."""
